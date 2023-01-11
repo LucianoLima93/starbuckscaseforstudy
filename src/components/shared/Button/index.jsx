@@ -1,16 +1,16 @@
 import React from "react";
 import { BlackButton, SoftButton } from "./styles";
 
-const Button = ({type, text}) => {
+const Button = ({type, text, style}) => {
   return (
     <>
       {type === "black" && (
-        <BlackButton>
+        <BlackButton style={{...style}}>
           {text}
         </BlackButton>
       )}
       {type === "soft" && (
-        <SoftButton>
+        <SoftButton style={{...style}}>
           {text}
         </SoftButton>
       )}

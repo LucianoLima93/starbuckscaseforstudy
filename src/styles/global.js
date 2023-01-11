@@ -1,4 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
+import SoDoSansBlackTtf from '../assets/fonts/sodosans/SoDoSans-Black.ttf';
+import SoDoSansBlackItalicTtf from '../assets/fonts/sodosans/SoDoSans-BlackItalic.ttf';
+import SoDoSansBoldTtf from '../assets/fonts/sodosans/SoDoSans-Bold.ttf';
+import SoDoSansBoldItalic from '../assets/fonts/sodosans/SoDoSans-BoldItalic.ttf';
+import SoDoSansItalic from '../assets/fonts/sodosans/SoDoSans-Italic.ttf';
+import SoDoSansLightTtf from '../assets/fonts/sodosans/SoDoSans-Light.ttf';
+import SoDoSansLightItalicTtf from '../assets/fonts/sodosans/SoDoSans-LightItalic.ttf';
+import SoDoSansRegularTtf from '../assets/fonts/sodosans/SoDoSans-Regular.ttf';
+import SoDoSansSemiBoldTtf from '../assets/fonts/sodosans/SoDoSans-SemiBold.ttf';
+import SoDoSansSemiBoldItalicTtf from '../assets/fonts/sodosans/SoDoSans-SemiBoldItalic.ttf';
+import SoDoSansThinTtf from '../assets/fonts/sodosans/SoDoSans-Thin.ttf';
+import SoDoSansThinItalicTtf from '../assets/fonts/sodosans/SoDoSans-ThinItalic.ttf';
 
 export default createGlobalStyle`
 html {
@@ -23,6 +35,7 @@ body {
   letter-spacing: -.01em;
   font-weight: 400;
   color: ${(props) => props.theme.color.neutral.low.dark};
+  font-feature-settings: "calt";
 }
 a:active, a:hover {
   outline: 0;
@@ -31,5 +44,112 @@ a:active, a:hover {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Black Italic'), local('SoDoSans-BlackItalic'),
+        url(${SoDoSansBlackItalicTtf}) format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Black'), local('SoDoSans-Black'),
+        url(${SoDoSansBlackTtf}) format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Bold'), local('SoDoSans-Bold'),
+        url(${SoDoSansBoldTtf}) format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Light Italic'), local('SoDoSans-LightItalic'),
+        url(${SoDoSansLightItalicTtf}) format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Regular'), local('SoDoSans-Regular'),
+        url(${SoDoSansRegularTtf}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Light'), local('SoDoSans-Light'),
+        url(${SoDoSansLightTtf}) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Italic'), local('SoDoSans-Italic'),
+        url(${SoDoSansItalic}) format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Bold Italic'), local('SoDoSans-BoldItalic'),
+        url(${SoDoSansBoldItalic}) format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Thin Italic'), local('SoDoSans-ThinItalic'),
+        url(${SoDoSansThinItalicTtf}) format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans SemiBold Italic'), local('SoDoSans-SemiBoldItalic'),
+        url(${SoDoSansSemiBoldItalicTtf}) format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans Thin'), local('SoDoSans-Thin'),
+        url(${SoDoSansThinTtf}) format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SoDo Sans';
+    src: local('SoDo Sans SemiBold'), local('SoDoSans-SemiBold'),
+        url(${SoDoSansSemiBoldTtf}) format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
 }
 `;

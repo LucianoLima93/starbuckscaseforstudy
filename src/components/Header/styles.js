@@ -93,6 +93,9 @@ export const FlexCenter = styled.div`
 `;
 
 export const FindIconContainer = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 600;
   margin-right: 4rem;
   display: inline-block;
