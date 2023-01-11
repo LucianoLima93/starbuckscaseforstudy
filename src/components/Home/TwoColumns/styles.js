@@ -20,16 +20,26 @@ export const ColumnTwo = styled.div`
   width: calc(100% * (6 / 12));
 `;
 export const Title = styled.div`
-  font-size: 50px;
   letter-spacing: 2px;
   line-height: 1.2;
   max-width: 83%;
   font-weight: 600;
   margin-bottom: 24px;
+  ${(props) => {
+    if (props.columnType === 'short') {
+      return `font-size: 24px;`;
+    }
+    return `font-size: 50px;`;
+  }}
 `;
 export const Description = styled.div`
-  font-size: 24px;
   max-width: 83%;
+  ${(props) => {
+    if (props.columnType === 'short') {
+      return `font-size: 19px;`;
+    }
+    return `font-size: 24px;`;
+  }}
 `;
 export const Image = styled.img`
   display: block;

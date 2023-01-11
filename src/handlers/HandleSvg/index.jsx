@@ -14,7 +14,7 @@ const Svg = ({
   const _color = color || themeContext.color.neutral.high.pure;
 
   return (
-    <React.Fragment onClick={onClick}>
+    <div onClick={onClick}>
       {name === "logo" && (
         <svg focusable="false" style={{ width: width, height: height, ...style }} viewBox="0 0 62 62">
           <circle cx="31" cy="31" fill="#fff" r="30.002"></circle>
@@ -30,7 +30,7 @@ const Svg = ({
           </path>
         </svg>
       )}
-    </React.Fragment>
+    </div>
   );
 };
 export default Svg;

@@ -40,6 +40,7 @@ const light = {
       pure: "#00754a",
       dark: "#3d7170",
       light: "#d4e9e2",
+      blueLight: "#96b2e1",
       houseGreen: '#1e3932',
     },
   }

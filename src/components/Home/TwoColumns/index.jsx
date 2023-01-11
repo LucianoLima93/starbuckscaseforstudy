@@ -6,13 +6,14 @@ const TwoColumn = ({
   direction = 'row',
   data = {},
   style = {},
-  btnStyle= {},
+  btnStyle = {},
+  columnType = 'grande',
 }) => {
   return (
     <Container style={{flexDirection: direction, ...style}}>
       <ColumnOne>
-        <Title>{data.title}</Title>
-        <Description>{data.description}</Description>
+        <Title columnType={columnType}>{data.title}</Title>
+        <Description columnType={columnType}>{data.description}</Description>
         <Button text={data.btnText} type={"soft"} style={btnStyle}></Button>
       </ColumnOne>
       <ColumnTwo>
