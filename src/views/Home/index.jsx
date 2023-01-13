@@ -7,7 +7,7 @@ import { twoColumnsData } from "../../data/twoColumns";
 
 const Home = () => {
   const themeContext = useContext(ThemeContext);
-
+  const date = new Date();
   const textColorOne = themeContext.color.neutral.high.pure;
   const textColorTwo = themeContext.color.brand.houseGreen;
   const bkgColorOne = themeContext.color.brand.dark;
@@ -33,7 +33,7 @@ const Home = () => {
         btnStyle={{...btnStyle, color: textColorTwo, borderColor: textColorTwo}}
         style={{backgroundColor: bkgColorThree, color: textColorTwo}} direction="row-reverse"/>
         <Warning>
-          <TextWarning>*At participating stores.</TextWarning>
+          <TextWarning>© {date.getFullYear()} This site is only for studies. All rights are reserved for Starbucks Coffee Company</TextWarning>
         </Warning>
     </Container>
   );
