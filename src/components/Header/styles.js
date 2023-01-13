@@ -64,6 +64,8 @@ export const LeftMenu = styled.div`
       padding-bottom: 4rem;
       display: inline-block;
       cursor: pointer;
+      text-decoration: none;
+      color: #000000DE;
       &:hover {
         color: #006341;
       }

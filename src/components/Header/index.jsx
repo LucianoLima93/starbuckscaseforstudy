@@ -3,6 +3,7 @@ import React from "react";
 import Container, { FindIconContainer, FlexCenter, ItemsFlex, LeftMenu, Logo, Nav, NavContainer, RightMenu, Wrapper } from "./styles";
 import Svg from '../../handlers/HandleSvg';
 import Button from "../shared/Button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -20,7 +21,7 @@ const Header = () => {
                 <ul>
                   <li><a>Menu</a></li>
                   <li><a>Rewards</a></li>
-                  <li><a>Gift Cards</a></li>
+                  <li><Link to="/gift">Gift Cards</Link></li>
                 </ul>
               </LeftMenu>
               <RightMenu>

@@ -1,16 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
-import SoDoSansBlackTtf from '../assets/fonts/sodosans/SoDoSans-Black.ttf';
-import SoDoSansBlackItalicTtf from '../assets/fonts/sodosans/SoDoSans-BlackItalic.ttf';
-import SoDoSansBoldTtf from '../assets/fonts/sodosans/SoDoSans-Bold.ttf';
-import SoDoSansBoldItalic from '../assets/fonts/sodosans/SoDoSans-BoldItalic.ttf';
-import SoDoSansItalic from '../assets/fonts/sodosans/SoDoSans-Italic.ttf';
-import SoDoSansLightTtf from '../assets/fonts/sodosans/SoDoSans-Light.ttf';
-import SoDoSansLightItalicTtf from '../assets/fonts/sodosans/SoDoSans-LightItalic.ttf';
-import SoDoSansRegularTtf from '../assets/fonts/sodosans/SoDoSans-Regular.ttf';
-import SoDoSansSemiBoldTtf from '../assets/fonts/sodosans/SoDoSans-SemiBold.ttf';
-import SoDoSansSemiBoldItalicTtf from '../assets/fonts/sodosans/SoDoSans-SemiBoldItalic.ttf';
-import SoDoSansThinTtf from '../assets/fonts/sodosans/SoDoSans-Thin.ttf';
-import SoDoSansThinItalicTtf from '../assets/fonts/sodosans/SoDoSans-ThinItalic.ttf';
+import SoDoSansBlackTtf from '../assets/fonts/sodosans/SoDoSansBlack.ttf';
+import SoDoSansBlackItalicTtf from '../assets/fonts/sodosans/SoDoSansBlackItalic.ttf';
+import SoDoSansBoldTtf from '../assets/fonts/sodosans/SoDoSansBold.ttf';
+import SoDoSansBoldItalic from '../assets/fonts/sodosans/SoDoSansBoldItalic.ttf';
+import SoDoSansItalic from '../assets/fonts/sodosans/SoDoSansItalic.ttf';
+import SoDoSansLightTtf from '../assets/fonts/sodosans/SoDoSansLight.ttf';
+import SoDoSansLightItalicTtf from '../assets/fonts/sodosans/SoDoSansLightItalic.ttf';
+import SoDoSansRegularTtf from '../assets/fonts/sodosans/SoDoSansRegular.ttf';
+import SoDoSansSemiBoldTtf from '../assets/fonts/sodosans/SoDoSansSemiBold.ttf';
+import SoDoSansSemiBoldItalicTtf from '../assets/fonts/sodosans/SoDoSansSemiBoldItalic.ttf';
+import SoDoSansThinTtf from '../assets/fonts/sodosans/SoDoSansThin.ttf';
+import SoDoSansThinItalicTtf from '../assets/fonts/sodosans/SoDoSansThinItalic.ttf';
 
 export default createGlobalStyle`
 html {
