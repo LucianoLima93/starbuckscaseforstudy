@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
-import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder } from "./styles";
+import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder, Card, ImageSpread } from "./styles";
 import { carouselData, defaultImages } from "../../data/carousel";
 
 const GiftCard = () => {
@@ -15,17 +15,8 @@ const GiftCard = () => {
   const [amountOnScreen, setAmountOnScreen] = useState(false);
   const [indexAmountOnScreen, setIndexAmountOnScreen] = useState(1);
   const [remainder, setRemainder] = useState(0);
-
-  const carouselItem = carouselData.map((item, i) => {
-    return (
-      <CardContainer key={i} ref={cardContainerRef}>
-        <ImageContainer>
-          <Image src={item.image} alt="carousel"/>
-          {/* <ImagePlaceholder src={defaultImages.placeholder} alt="placeholder"/> */}
-        </ImageContainer>
-      </CardContainer>
-    )
-  });
+  const [finalSlide, setFinalSlide] = useState(false);
+  const [inactiveClass, setInactiveClass] = useState('');
   // TODO será a area calculo por scroll
   useEffect(() => {
     const _amountOnScreen = Math.trunc(carouselContainerRef.current.offsetWidth / cardContainerRef.current.offsetWidth);
@@ -39,22 +30,30 @@ const GiftCard = () => {
 
   const goToNext = () => {
     const valeuToScroll = offsetWidthCard * amountOnScreen;
+    const valeuToScrollRemainder = offsetWidthCard * remainder;
+
     if (carouselContainerRef.current) {
-      if ((indexAmountOnScreen) === maxToScroll && remainder > 0) {
-        translate3dCarousel(-(offsetWidthCard * remainder) + valueToTranslate, indexAmountOnScreen + 1);
+      if (indexAmountOnScreen === maxToScroll && remainder > 0) {
+        translate3dCarousel(-valeuToScrollRemainder + valueToTranslate, indexAmountOnScreen);
+        setFinalSlide(!finalSlide);
       } else {
         translate3dCarousel(-valeuToScroll + valueToTranslate, indexAmountOnScreen + 1);
+        if((indexAmountOnScreen + 1) === maxToScroll && remainder === 0) setFinalSlide(!finalSlide);
       }
     }
   }
 
   const goToPrev = () => {
     const valeuToScroll = offsetWidthCard * amountOnScreen;
+    const valeuToScrollRemainder = offsetWidthCard * remainder;
+
     if (carouselContainerRef.current && !disablePrev) {
-      if ((indexAmountOnScreen) === maxToScroll && remainder > 0) {
-        translate3dCarousel(valueToTranslate + (offsetWidthCard * remainder), indexAmountOnScreen - 1);
+      if (finalSlide && remainder > 0) {
+        translate3dCarousel(valueToTranslate + valeuToScrollRemainder, indexAmountOnScreen);
+        setFinalSlide(!finalSlide);
       } else {
         translate3dCarousel(valueToTranslate + valeuToScroll, indexAmountOnScreen - 1);
+        if(indexAmountOnScreen === maxToScroll && remainder === 0) setFinalSlide(!finalSlide);
       }
     }
   }
@@ -64,14 +63,13 @@ const GiftCard = () => {
     setIndexAmountOnScreen(index);
   }
   useEffect(() => {
-    const addIfRemaider = remainder > 0 ? 1 : 0;
-    const _maxToScroll = maxToScroll + addIfRemaider;
-    if (indexAmountOnScreen === _maxToScroll) {
+    if (finalSlide) {
       setDisableNext(true);
     } else {
       setDisableNext(false);
     }
-  },[indexAmountOnScreen, maxToScroll, remainder]);
+    if (indexAmountOnScreen === 0) setIndexAmountOnScreen(1);
+  },[indexAmountOnScreen, finalSlide]);
 
   useEffect(() => {
     if (valueToTranslate === 0) {
@@ -81,10 +79,33 @@ const GiftCard = () => {
     }
   },[valueToTranslate]);
 
+  const verifyIfInactive = (item, i) => {
+    console.log(item);
+    console.log(i);
+  }
+  useEffect(() => {
+    console.log(carouselContainerRef.current);
+  }, [])
+
+  const carouselItem = carouselData.map((item, i) => {
+    return (
+      <CardContainer key={i} ref={cardContainerRef} className={inactiveClass}>
+        <Card>
+          <div style={{paddingBottom: "62.9747%"}}/>
+          <ImageContainer>
+            <ImageSpread>
+              <Image src={item.image} alt="carousel"/>
+            </ImageSpread>
+            {/* <ImagePlaceholder src={defaultImages.placeholder} alt="placeholder"/> */}
+          </ImageContainer>
+        </Card>
+      </CardContainer>
+    )
+  });
 
   return (
     <Container>
-      <div style={{fontSize: "24px", marginBottom: "20px", display: "flex"}}>
+      <div style={{fontSize: "24px", marginBottom: "20px", display: "flex", justifyContent: "space-between"}}>
         {!disablePrev && <div onClick={() => goToPrev()}>Prev</div>}
         {!disableNext && <div onClick={() => goToNext()} >Next</div>}
       </div>
