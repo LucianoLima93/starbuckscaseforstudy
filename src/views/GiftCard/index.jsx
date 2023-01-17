@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useRef, useState } from "react";
-import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder, Card, ImageSpread } from "./styles";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder, Card, ImageSpread, ButtonArrow, ButtonArrowContainer } from "./styles";
 import { carouselData, defaultImages } from "../../data/carousel";
+import Svg from "../../handlers/HandleSvg";
 
 const GiftCard = () => {
   const cardContainerRef = useRef(null);
@@ -16,16 +17,22 @@ const GiftCard = () => {
   const [indexAmountOnScreen, setIndexAmountOnScreen] = useState(1);
   const [remainder, setRemainder] = useState(0);
   const [finalSlide, setFinalSlide] = useState(false);
-  const [inactiveClass, setInactiveClass] = useState('');
-  // TODO será a area calculo por scroll
-  useEffect(() => {
+
+  const handleResize = () => {
+    console.log('passei');
     const _amountOnScreen = Math.trunc(carouselContainerRef.current.offsetWidth / cardContainerRef.current.offsetWidth);
     setAmountOnScreen(_amountOnScreen);
-
     setOffsetWidthCard(cardContainerRef.current.offsetWidth);
     setMaxToScroll(Math.trunc(carouselData.length / _amountOnScreen));
     setRemainder(carouselData.length % _amountOnScreen);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  };
+
+  useLayoutEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const goToNext = () => {
@@ -78,23 +85,41 @@ const GiftCard = () => {
       setDisablePrev(false);
     }
   },[valueToTranslate]);
-  useEffect(() => {
-    console.log('indexAmountOnScreen: ', indexAmountOnScreen);
-    console.log('amountOnScreen', amountOnScreen * indexAmountOnScreen);
-    console.log('remainder: ', remainder);
-    console.log(carouselData.length);
-    Array.from(carouselContainerRef.current.children).forEach((el, index, array) => {
-      if (indexAmountOnScreen === 1) {
-        // Start of carousel
-        if ((index + 1) > amountOnScreen) el.classList.toggle("inactive-carousel");
-      } else {
-      }
-    })
-  }, [indexAmountOnScreen, amountOnScreen, remainder])
 
+  const observer = useMemo(() => {
+    const options = {
+      root: carouselContainerRef.current,
+      rootMargin: '0px',
+      threshold: 1
+    }
+    const callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('inactive-carousel');
+        } else {
+          entry.target.classList.add('inactive-carousel');
+        }
+      })
+    }
+    return new IntersectionObserver(callback, options);
+  }, []);
+
+  useEffect(() => {
+    Array.prototype.forEach.call(carouselContainerRef.current.children, (el) => {
+      observer.observe(el);
+    })
+  }, [observer]);
+  const btnContainerStyle = {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+  const svgStyle = { overflow: 'visible', fill: 'currentcolor' }
   const carouselItem = carouselData.map((item, i) => {
     return (
-      <CardContainer key={i} ref={cardContainerRef} className={inactiveClass}>
+      <CardContainer key={i} ref={cardContainerRef}>
         <Card>
           <div style={{paddingBottom: "62.9747%"}}/>
           <ImageContainer>
@@ -110,13 +135,31 @@ const GiftCard = () => {
 
   return (
     <Container>
-      <div style={{fontSize: "24px", marginBottom: "20px", display: "flex", justifyContent: "space-between"}}>
-        {!disablePrev && <div onClick={() => goToPrev()}>Prev</div>}
-        {!disableNext && <div onClick={() => goToNext()} >Next</div>}
-      </div>
+      {!disablePrev &&
+      <ButtonArrowContainer direction='left'>
+        <ButtonArrow onClick={() => goToPrev()}>
+          <Svg name="ic-arrow"
+            width="24px"
+            height="24px"
+            containerStyle={btnContainerStyle}
+            style={svgStyle}/>
+        </ButtonArrow>
+      </ButtonArrowContainer>
+      }
       <CarouselContainer ref={carouselContainerRef}>
         {carouselItem}
       </CarouselContainer>
+      {!disableNext &&
+      <ButtonArrowContainer direction='right'>
+        <ButtonArrow onClick={() => goToNext()} >
+          <Svg name="ic-arrow"
+            width="24px"
+            height="24px"
+            containerStyle={btnContainerStyle}
+            style={{...svgStyle, transform: 'rotate(180deg)'}}/>
+        </ButtonArrow>
+      </ButtonArrowContainer>
+      }
     </Container>
   );
 };

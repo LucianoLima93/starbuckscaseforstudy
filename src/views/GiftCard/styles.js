@@ -8,6 +8,7 @@ export const Container = styled.div`
   padding-right: 6.4rem;
   padding-bottom: 1.6rem!important;
   padding-top: 1.6rem!important;
+  position: relative;
 `;
 
 export const CarouselContainer = styled.div`
@@ -15,6 +16,41 @@ export const CarouselContainer = styled.div`
   white-space: nowrap;
   z-index: 0;
   transition: all .4s ease;
+`;
+
+export const ButtonArrowContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  ${(props) => {
+    if(props.direction === 'left') {
+      return 'left: 2.4rem'
+    } else {
+      return 'right: 2.4rem'
+    }
+  }}
+`
+
+export const ButtonArrow = styled.div`
+  transition-property: all;
+  transition-duration: .2s;
+  transition-timing-function: ease;
+  width: 40px;
+  height: 40px;
+  line-height: 4rem;
+  background: #fff;
+  font-size: 1.6rem;
+  box-shadow: 0 0 6px rgb(0 0 0 / 24%), 0 8px 12px rgb(0 0 0 / 14%);
+  border-radius: 50%;
+  position: relative;
+  :active {
+    box-shadow: 0 0 6px rgb(0 0 0 / 24%), 0 8px 12px transparent;
+    transform: translateY(4px);
+  }
+  :focus {
+    outline: none;
+  }
 `;
 
 export const CardContainer = styled.div`

@@ -10,7 +10,7 @@ const App = () => {
   return (
     <ThemeProvider theme={light}>
       <GlobalStyle/>
-      <Header/>
+      {/* <Header/> */}
       <Content/>
     </ThemeProvider>
   );
