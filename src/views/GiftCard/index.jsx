@@ -78,14 +78,19 @@ const GiftCard = () => {
       setDisablePrev(false);
     }
   },[valueToTranslate]);
-
-  const verifyIfInactive = (item, i) => {
-    console.log(item);
-    console.log(i);
-  }
   useEffect(() => {
-    console.log(carouselContainerRef.current);
-  }, [])
+    console.log('indexAmountOnScreen: ', indexAmountOnScreen);
+    console.log('amountOnScreen', amountOnScreen * indexAmountOnScreen);
+    console.log('remainder: ', remainder);
+    console.log(carouselData.length);
+    Array.from(carouselContainerRef.current.children).forEach((el, index, array) => {
+      if (indexAmountOnScreen === 1) {
+        // Start of carousel
+        if ((index + 1) > amountOnScreen) el.classList.toggle("inactive-carousel");
+      } else {
+      }
+    })
+  }, [indexAmountOnScreen, amountOnScreen, remainder])
 
   const carouselItem = carouselData.map((item, i) => {
     return (
