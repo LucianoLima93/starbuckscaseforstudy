@@ -3,14 +3,13 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from "./styles/global";
 import light from './styles/theme/light';
 import Header from "./components/Header";
-// import Home from "./views/Home";
 import Content from "./routes";
 
 const App = () => {
   return (
     <ThemeProvider theme={light}>
       <GlobalStyle/>
-      {/* <Header/> */}
+      <Header/>
       <Content/>
     </ThemeProvider>
   );
