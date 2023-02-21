@@ -6,9 +6,15 @@ export const Container = styled.div`
   z-index: 0;
   padding-left: 131px;
   padding-right: 6.4rem;
-  padding-bottom: 1.6rem!important;
-  padding-top: 1.6rem!important;
+  padding-bottom: 1.6rem;
+  padding-top: 1.6rem;
   position: relative;
+  @media screen and (max-width: 992px) {
+    padding-left: 1.6rem;
+    padding-right: 2.4rem;
+    padding-bottom: 1.6rem;
+    padding-top: 1.6rem;
+  }
 `;
 
 export const CarouselContainer = styled.div`
@@ -61,6 +67,10 @@ export const CardContainer = styled.div`
   &.inactive-carousel {
     opacity: .2;
     pointer-events: none;
+  }
+  @media screen and (max-width: 992px) {
+    width: 50%;
+    padding: 0 0.8rem;
   }
 `;
 

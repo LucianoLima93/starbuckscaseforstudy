@@ -5,12 +5,12 @@ import { carouselData } from "../../data/carousel";
 
 
 const GiftCard = () => {
-  const carousels = carouselData.map((el) => {
+  const carousels = carouselData.map((el, i) => {
     return (
-      <>
+      <div key={i}>
         <CarouselTitle>{el.displayName}</CarouselTitle>
         <Carousel carouselData={el.data}/>
-      </>
+      </div>
     )
   })
   return (

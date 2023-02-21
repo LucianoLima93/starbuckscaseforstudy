@@ -67,13 +67,13 @@ const Carousel = ({carouselData}) => {
     setIndexAmountOnScreen(index);
   }
   useEffect(() => {
-    if (finalSlide) {
+    if (finalSlide || carouselData.length < amountOnScreen) {
       setDisableNext(true);
     } else {
       setDisableNext(false);
     }
     if (indexAmountOnScreen === 0) setIndexAmountOnScreen(1);
-  },[indexAmountOnScreen, finalSlide]);
+  },[indexAmountOnScreen, finalSlide, amountOnScreen, carouselData]);
 
   useEffect(() => {
     if (valueToTranslate === 0) {
@@ -90,7 +90,6 @@ const Carousel = ({carouselData}) => {
       threshold: 1
     }
     const callback = (entries, observer) => {
-    console.log(entries);
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.remove('inactive-carousel');
