@@ -9,7 +9,7 @@ export const Container = styled.div`
   padding-bottom: 1.6rem;
   padding-top: 1.6rem;
   position: relative;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.xl}) {
     padding-left: 1.6rem;
     padding-right: 2.4rem;
     padding-bottom: 1.6rem;
@@ -68,8 +68,12 @@ export const CardContainer = styled.div`
     opacity: .2;
     pointer-events: none;
   }
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
     width: 50%;
+    padding: 0 0.8rem;
+  }
+  @media screen and (max-width: ${(props) => props.theme.breakpoints.lg}) and (min-width: ${(props) => props.theme.breakpoints.md}) {
+    width: 33%;
     padding: 0 0.8rem;
   }
 `;
