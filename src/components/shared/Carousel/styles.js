@@ -68,13 +68,17 @@ export const CardContainer = styled.div`
     opacity: .2;
     pointer-events: none;
   }
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
-    width: 50%;
-    padding: 0 0.8rem;
+  width: 50%;
+  padding: 0 0.8rem;
+  @media screen and (min-width: 480px) {
+    width: 33.33333%;
   }
-  @media screen and (max-width: ${(props) => props.theme.breakpoints.lg}) and (min-width: ${(props) => props.theme.breakpoints.md}) {
-    width: 33%;
-    padding: 0 0.8rem;
+  @media screen and (min-width: 1024px) {
+    width: 25%;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 24.16667%;
+    padding: 0 1.6rem;
   }
 `;
 

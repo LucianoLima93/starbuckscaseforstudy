@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder, Card, ImageSpread, ButtonArrow, ButtonArrowContainer } from "./styles";
 import Svg from "../../../handlers/HandleSvg";
+import { useDebouncedCallback } from "use-debounce";
 
 const Carousel = ({carouselData}) => {
   const cardContainerRef = useRef(null);
@@ -15,94 +16,139 @@ const Carousel = ({carouselData}) => {
   const [indexAmountOnScreen, setIndexAmountOnScreen] = useState(0);
   const [remainder, setRemainder] = useState(0);
   const [finalSlide, setFinalSlide] = useState(false);
-  const [currentIndexOnScreen, setCurrentIndexOnScreen] = useState({value: 0, next: true});
-  const [currentValue, setCurrentValue] = useState(0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const setInitialState = useCallback(() => {
+  const [currentIndexOnScreen, setCurrentIndexOnScreen] = useState(0);
+  const [prevNextIdx, setPrevNextIdx] = useState(0);
+  const [prevRemainder, setPrevRemainder] = useState(0);
+  const [nextRemainder, setNextRemainder] = useState(0);
+  
+  const setInitialState = () => {
     const _amountOnScreen = Math.trunc(carouselContainerRef.current.offsetWidth / cardContainerRef.current.offsetWidth);
     setAmountOnScreen(_amountOnScreen);
-    setOffsetWidthCard(cardContainerRef.current.offsetWidth);
+    setOffsetWidthCard(parseFloat(cardContainerRef.current.offsetWidth));
     setMaxToScroll(Math.trunc(carouselData.length / _amountOnScreen));
-    setRemainder(carouselData.length % _amountOnScreen);   
-  })
+    setRemainder(carouselData.length % _amountOnScreen);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
 
   useEffect(() => {
     setInitialState();
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      setInitialState();
-      if (currentIndexOnScreen.value > 0) {
-        let newValueToTranslate;
-        let newIndex;
-        if (finalSlide) {
-          newValueToTranslate = (currentIndexOnScreen.value - remainder) * offsetWidthCard;
-          newIndex = maxToScroll;
-        } else {
-          newValueToTranslate = (currentIndexOnScreen.value) * offsetWidthCard;
-          newIndex = Math.trunc(currentIndexOnScreen.value / amountOnScreen);
-        }
-        
-        translate3dCarousel(-newValueToTranslate, newIndex);
-      }
-    }
+  const handleResize = useDebouncedCallback(() => {
+    setInitialState();
+    if (currentIndexOnScreen > 0) {
+      let newValueToTranslate;
 
+      if (finalSlide) {
+        newValueToTranslate = (carouselData.length - amountOnScreen) * offsetWidthCard;
+      } else {
+        newValueToTranslate = currentIndexOnScreen * offsetWidthCard;
+      }       
+
+      setPrevNextIdx(Math.trunc(currentIndexOnScreen / amountOnScreen));
+      setPrevRemainder(currentIndexOnScreen % amountOnScreen);
+      setNextRemainder((carouselData.length - currentIndexOnScreen) % amountOnScreen);
+
+      translate3dCarousel(-newValueToTranslate, indexAmountOnScreen);
+    }
+  }, 0);
+
+  useLayoutEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [amountOnScreen, currentIndexOnScreen, finalSlide, maxToScroll, offsetWidthCard, remainder, setInitialState]);
+  }, [handleResize]);
   
   const goToNext = () => {
     const valeuToScroll = offsetWidthCard * amountOnScreen;
-    const valeuToScrollRemainder = offsetWidthCard * remainder;
+    let _remainder, _indexAmountOnScreen;
+
+    if (prevNextIdx > 0) {
+      _indexAmountOnScreen = prevNextIdx;
+      _remainder = nextRemainder;
+      setPrevNextIdx(prevNextIdx + 1);
+    } else {
+      _remainder = remainder;
+      _indexAmountOnScreen = indexAmountOnScreen;
+    }
+
+    const valeuToScrollRemainder = offsetWidthCard * _remainder;
 
     if (carouselContainerRef.current) {
-      translate3dCarousel(-valeuToScroll + valueToTranslate, indexAmountOnScreen + 1);
-      if (indexAmountOnScreen + 1 === maxToScroll && remainder > 0) {
-        translate3dCarousel(-valeuToScrollRemainder + valueToTranslate, indexAmountOnScreen);
+      translate3dCarousel(-valeuToScroll + valueToTranslate, _indexAmountOnScreen + 1);
+      if (_indexAmountOnScreen + 1 === maxToScroll && _remainder > 0) {
+        translate3dCarousel(-valeuToScrollRemainder + valueToTranslate, _indexAmountOnScreen);
         setFinalSlide(!finalSlide);
       } else {
-        translate3dCarousel(-valeuToScroll + valueToTranslate, indexAmountOnScreen + 1);
-        if((indexAmountOnScreen + 1) === maxToScroll && remainder === 0) setFinalSlide(!finalSlide);
+        translate3dCarousel(-valeuToScroll + valueToTranslate, _indexAmountOnScreen + 1);
+        if((currentIndexOnScreen + amountOnScreen) === (carouselData.length - amountOnScreen)
+        && _remainder === 0) setFinalSlide(!finalSlide);
       }
-      setCurrentIndexOnScreen({value: currentIndexOnScreen.value + amountOnScreen, next: true});
+      setCurrentIndexOnScreen(currentIndexOnScreen + amountOnScreen);
     }
   }
 
   const goToPrev = () => {
     const valeuToScroll = offsetWidthCard * amountOnScreen;
-    const valeuToScrollRemainder = offsetWidthCard * remainder;
+    let _remainder, _indexAmountOnScreen;
+
+    if (prevNextIdx > 0) {
+      _indexAmountOnScreen = prevNextIdx;
+      _remainder = prevRemainder;
+      setPrevNextIdx(prevNextIdx - 1);
+    } else {
+      _remainder = remainder;
+      _indexAmountOnScreen = indexAmountOnScreen;
+    }
+
+    const valeuToScrollRemainder = offsetWidthCard * _remainder;
+
     if (carouselContainerRef.current) {
-      if (finalSlide && remainder > 0) setFinalSlide(!finalSlide);
-      if (indexAmountOnScreen === 0 && remainder > 0) {
-        translate3dCarousel(valueToTranslate + valeuToScrollRemainder, indexAmountOnScreen);
+      if (finalSlide) setFinalSlide(!finalSlide);
+      if (_indexAmountOnScreen === 0 && _remainder > 0) {
+        translate3dCarousel(valueToTranslate + valeuToScrollRemainder, _indexAmountOnScreen);
       } else {
-        translate3dCarousel(valueToTranslate + valeuToScroll, indexAmountOnScreen - 1);
+        translate3dCarousel(valueToTranslate + valeuToScroll, _indexAmountOnScreen - 1);
       }
-      setCurrentIndexOnScreen({value: currentIndexOnScreen.value - amountOnScreen, next: false});
+      const _currentIndexOnScreen = currentIndexOnScreen - amountOnScreen
+
+      setCurrentIndexOnScreen(_currentIndexOnScreen < 0 ? 0 : _currentIndexOnScreen);
     }
   }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const reset = () => {
+    if (prevNextIdx > 0) {
+      setInitialState();
+      setPrevNextIdx(0);
+      setPrevRemainder(0);
+      setIndexAmountOnScreen(0);
+      setCurrentIndexOnScreen(0);
+    }
+  }
   const translate3dCarousel = (translateValue, index) => {
     carouselContainerRef.current.style.transform = `translate3d(${translateValue}px, 0px, 0px)`;
     setValueToTranslate(translateValue);
     setIndexAmountOnScreen(index);
   }
+
   useEffect(() => {
-    if (valueToTranslate === 0) {
+    if (valueToTranslate === 0 || currentIndexOnScreen === 0) {
       setDisablePrev(true);
+      reset();
     } else {
       setDisablePrev(false);
     }
+  }, [currentIndexOnScreen, reset, valueToTranslate])
 
+  useEffect(() => {
     if (finalSlide) {
       setDisableNext(true);
     } else {
       setDisableNext(false);
     }
-  }, [amountOnScreen, carouselData.length, finalSlide, valueToTranslate])
+  }, [amountOnScreen, carouselData.length, finalSlide])
 
   const observer = useMemo(() => {
     const options = {
@@ -159,7 +205,7 @@ const Carousel = ({carouselData}) => {
       {`amountOnScreen: ${amountOnScreen} `}
       {`offsetWidthCard: ${offsetWidthCard} `}
       {`remainder: ${remainder} `}
-      {`currentIndexOnScreen: ${currentIndexOnScreen.value} `}
+      {`currentIndexOnScreen: ${currentIndexOnScreen} `}
       {`carouselData.length: ${carouselData.length} `}
       {!disablePrev &&
       <ButtonArrowContainer direction='left'>
