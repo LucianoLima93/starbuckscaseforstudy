@@ -22,6 +22,7 @@ export const CarouselContainer = styled.div`
   white-space: nowrap;
   z-index: 0;
   transition: all .4s ease;
+  margin-left: -1.6rem;
 `;
 
 export const ButtonArrowContainer = styled.div`

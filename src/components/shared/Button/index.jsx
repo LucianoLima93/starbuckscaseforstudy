@@ -1,5 +1,5 @@
 import React from "react";
-import { BlackButton, SoftButton } from "./styles";
+import { BlackButton, Link, SoftButton } from "./styles";
 
 const Button = ({type, text, style}) => {
   return (
@@ -13,6 +13,11 @@ const Button = ({type, text, style}) => {
         <SoftButton style={{...style}}>
           {text}
         </SoftButton>
+      )}
+      {type === "link" && (
+        <Link style={{...style}}>
+          {text}
+        </Link>
       )}
     </>
   );

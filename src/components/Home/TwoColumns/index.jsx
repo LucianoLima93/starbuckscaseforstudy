@@ -11,14 +11,14 @@ const TwoColumn = ({
 }) => {
   return (
     <Container style={{flexDirection: direction, ...style}}>
+      <ColumnTwo>
+        <Image src={data.image} loading="lazy"></Image>
+      </ColumnTwo>
       <ColumnOne>
         <Title columnType={columnType}>{data.title}</Title>
         <Description columnType={columnType}>{data.description}</Description>
         <Button text={data.btnText} type={"soft"} style={btnStyle}></Button>
       </ColumnOne>
-      <ColumnTwo>
-        <Image src={data.image} loading="lazy"></Image>
-      </ColumnTwo>
     </Container>
   );
 };

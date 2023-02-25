@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.header`
   position: relative;
   z-index: 3;
+  height: 100%;
+  max-height: 101px;
+  min-height: 72px;
 `;
 
 export const Nav = styled.nav`
@@ -23,29 +26,41 @@ export const Nav = styled.nav`
 `;
 
 export const NavContainer = styled.div`
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 0;
-  padding-right: 0;
+  @media screen and (min-width: 1520px) {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  padding-left: 4rem;
+  padding-right: 4rem;
 `;
 
 export const ItemsFlex = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 72px;
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
   align-items: center;
   flex-grow: 1;
+  display: none;
+  @media screen and (min-width: 992px) {
+    display: flex;
+  }
 `;
 
 export const Logo = styled.div`
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%);
   margin-right: 4rem;
+  @media screen and (min-width: 1702px) {
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   a svg {
     width: 51px;
     height: 51px;

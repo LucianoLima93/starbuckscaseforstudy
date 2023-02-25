@@ -30,4 +30,7 @@ export const SoftButton = styled(ButtonContainer)`
     background-color: rgba(0,0,0,.06);
   }
 `;
+export const Link = styled(ButtonContainer)`
+  border-color: transparent;
+`;
 export default ButtonContainer;

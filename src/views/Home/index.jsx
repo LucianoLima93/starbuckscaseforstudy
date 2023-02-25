@@ -20,18 +20,18 @@ const Home = () => {
       <TextBanner/>
       <TwoColumns data={twoColumnsData.firstColumn}
         btnStyle={{...btnStyle, color: textColorOne, borderColor: textColorOne}}
-        style={{backgroundColor: bkgColorOne, color: textColorOne}}/>
+        style={{backgroundColor: bkgColorOne, color: textColorOne}} direction="row-reverse"/>
       <TwoColumns data={twoColumnsData.secondColumn}
         btnStyle={{...btnStyle, color: textColorTwo, borderColor: textColorTwo}}
-        style={{backgroundColor: bkgColorTwo, color: textColorTwo}} direction="row-reverse"/>
+        style={{backgroundColor: bkgColorTwo, color: textColorTwo}}/>
       <TwoColumns data={twoColumnsData.thirdColumn}
         columnType="short"
         btnStyle={{...btnStyle, color: textColorOne, borderColor: textColorOne}}
-        style={{backgroundColor: bkgColorOne, color: textColorOne}}/>
+        style={{backgroundColor: bkgColorOne, color: textColorOne}} direction="row-reverse"/>
       <TwoColumns data={twoColumnsData.fourthColumn}
         columnType="short"
         btnStyle={{...btnStyle, color: textColorTwo, borderColor: textColorTwo}}
-        style={{backgroundColor: bkgColorThree, color: textColorTwo}} direction="row-reverse"/>
+        style={{backgroundColor: bkgColorThree, color: textColorTwo}}/>
         <Warning>
           <TextWarning>© {date.getFullYear()} This site is only for studies. All rights are reserved for Starbucks Coffee Company</TextWarning>
         </Warning>
