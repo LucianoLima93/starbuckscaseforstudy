@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder, Card, ImageSpread, ButtonArrow, ButtonArrowContainer } from "./styles";
 import Svg from "../../../handlers/HandleSvg";
 import { useDebouncedCallback } from "use-debounce";
+import DefaultCard from "../DefaultCard";
 
 const Carousel = ({carouselData}) => {
   const cardContainerRef = useRef(null);
@@ -140,7 +141,7 @@ const Carousel = ({carouselData}) => {
     const options = {
       root: carouselContainerRef.current,
       rootMargin: '0px',
-      threshold: 1
+      threshold: .75
     }
     const callback = (entries, observer) => {     
       entries.forEach((entry) => {
@@ -170,15 +171,7 @@ const Carousel = ({carouselData}) => {
   const carouselItem = carouselData.map((item, i) => {
     return (
       <CardContainer key={i} ref={cardContainerRef}>
-        <Card>
-          <div style={{paddingBottom: "62.9747%"}}/>
-          <ImageContainer>
-            <ImageSpread>
-              <Image src={item.image} alt="carousel"/>
-            </ImageSpread>
-            {/* <ImagePlaceholder src={defaultImages.placeholder} alt="placeholder"/> */}
-          </ImageContainer>
-        </Card>
+        <DefaultCard item={item}/>
       </CardContainer>
     )
   });
