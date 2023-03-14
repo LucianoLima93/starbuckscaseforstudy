@@ -20,7 +20,7 @@ const Header = () => {
               <LeftMenu>
                 <ul>
                   <li><a>Menu</a></li>
-                  <li><a>Rewards</a></li>
+                  <li><Link to="/rewards">Rewards</Link></li>
                   <li><Link to="/gift">Gift Cards</Link></li>
                 </ul>
               </LeftMenu>

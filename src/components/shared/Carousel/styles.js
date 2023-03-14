@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   overflow: hidden;
-  touch-action: pan-y pinch-zoom;
   z-index: 0;
   padding-left: 131px;
   padding-right: 6.4rem;
@@ -10,6 +9,7 @@ export const Container = styled.div`
   padding-top: 1.6rem;
   position: relative;
   @media screen and (max-width: ${(props) => props.theme.breakpoints.xl}) {
+    touch-action: pan-y pinch-zoom;
     padding-left: 1.6rem;
     padding-right: 2.4rem;
     padding-bottom: 1.6rem;

@@ -14,6 +14,7 @@ const light = {
   },
   boxShadow: {
     header: 'rgba(0,0,0,.1),0 2px 2px rgba(0,0,0,.06),0 0 2px rgba(0,0,0,.07)',
+    rewardsBanner: '0 4px 4px 0 rgba(0,0,0,0.12), 0 0 2px 0 rgba(0,0,0,0.24)'
   },
   font: {
     family: 'SoDo Sans',
@@ -39,10 +40,12 @@ const light = {
     brand: {
       pure: "#00754a",
       dark: "#3d7170",
+      darkest: "#1e3932",
       light: "#d4e9e2",
       blueLight: "#96b2e1",
       houseGreen: '#1e3932',
     },
+
   }
 }
 
