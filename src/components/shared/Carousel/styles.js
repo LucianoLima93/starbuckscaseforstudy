@@ -65,6 +65,7 @@ export const CardContainer = styled.div`
   padding: 0 1.6rem;
   white-space: normal;
   display: inline-block;
+  transition: opacity 150ms;
   &.inactive-carousel {
     opacity: .2;
     pointer-events: none;

@@ -79,8 +79,7 @@ export const Image = styled.img`
   width: 100%;
   height: auto;
   border-radius: 3.3333%/5.298%;
+  display: ${(props) => props.showImage ? 'block' : 'none'};
 `;
-
-export const ImagePlaceholder = styled.img``;
 
 export default Card;

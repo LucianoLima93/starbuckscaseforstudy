@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import Container, { CardContainer, CarouselContainer, Image, ImageContainer, ImagePlaceholder, Card, ImageSpread, ButtonArrow, ButtonArrowContainer } from "./styles";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import Container, { CardContainer, CarouselContainer, ButtonArrow, ButtonArrowContainer } from "./styles";
 import Svg from "../../../handlers/HandleSvg";
 import { useDebouncedCallback } from "use-debounce";
-import DefaultCard from "../DefaultCard";
 
-const Carousel = ({carouselData}) => {
+const Carousel = ({carouselData, renderCard, showSeeMore = () => {}}) => {
   const cardContainerRef = useRef(null);
   const carouselContainerRef = useRef(null);
   const carouselLength = carouselData && carouselData.length;
@@ -102,6 +101,10 @@ const Carousel = ({carouselData}) => {
   }, [auxIndex]);
   
   useEffect(() => {
+    showSeeMore(amountOnScreen);
+  },[amountOnScreen, showSeeMore]);
+
+  useEffect(() => {
     if (indexAmountOnScreen === maxToScroll
       || currentIndexOnScreen + amountOnScreen === carouselLength) {
       setDisableNext(false);
@@ -114,7 +117,7 @@ const Carousel = ({carouselData}) => {
       setDisablePrev(false);
       setUpdateIndex(false);
     }
-  }, [amountOnScreen, carouselLength, currentIndexOnScreen, indexAmountOnScreen, maxToScroll])
+  }, [amountOnScreen, carouselLength, currentIndexOnScreen, indexAmountOnScreen, maxToScroll, showSeeMore])
 
   const goToNext = () => {
     if (carouselContainerRef.current) {
@@ -141,7 +144,7 @@ const Carousel = ({carouselData}) => {
     const options = {
       root: carouselContainerRef.current,
       rootMargin: '0px',
-      threshold: .75
+      threshold: .30
     }
     const callback = (entries, observer) => {     
       entries.forEach((entry) => {
@@ -171,7 +174,7 @@ const Carousel = ({carouselData}) => {
   const carouselItem = carouselData.map((item, i) => {
     return (
       <CardContainer key={i} ref={cardContainerRef}>
-        <DefaultCard item={item}/>
+        {renderCard(item)}
       </CardContainer>
     )
   });

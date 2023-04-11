@@ -29,25 +29,24 @@ export const ColumnTwo = styled.div`
   }
 `;
 export const Title = styled.div`
-  letter-spacing: 2px;
   line-height: 1.2;
   width: 100%;
   font-weight: 600;
   margin-bottom: 24px;
-  font-size: 24px;
-  @media screen and (min-width: 1024px) {
-    ${(props) => {
-      if (props.columnType === 'short') {
-        return `font-size: 24px;`;
-      }
-      return `font-size: 50px;`;
-    }}
-  }
   @media screen and (min-width: 992px) {
     max-width: 83%;
   }
   @media screen and (min-width: 375px) {
     font-size: 28px;
+  }
+  @media screen and (min-width: 1024px) {
+    ${(props) => {
+      if (props.columnType === 'short') {
+        return `font-size: 24px;`;
+      }
+      return `font-size: 50px;
+      letter-spacing: 2px;`;
+    }}
   }
 `;
 export const Description = styled.div`
@@ -58,13 +57,15 @@ export const Description = styled.div`
   @media screen and (min-width: 375px) {
     font-size: 22px;
   }
-  font-size: 19px;
+  @media screen and (min-width: 768px){
   ${(props) => {
     if (props.columnType === 'short') {
-      return `font-size: 19px;`;
+      return `font-size: 19px;
+      line-height: 1.75;`;
     }
     return `font-size: 24px;`;
   }}
+  }
 `;
 export const Image = styled.img`
   display: block;

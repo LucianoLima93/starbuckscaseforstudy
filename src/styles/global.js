@@ -32,7 +32,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
-  letter-spacing: -.01em;
+  letter-spacing: .1px;
   font-weight: 400;
   color: ${(props) => props.theme.color.neutral.low.dark};
   font-feature-settings: "calt";

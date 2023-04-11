@@ -10,7 +10,8 @@ const Rewards = () => {
           <BannerTitle>Starbucks® Rewards</BannerTitle>
         </BannerContent>
       </Banner>
-      <DesktopBanner></DesktopBanner>
+      <DesktopBanner>
+      </DesktopBanner>
     </Container>
   )
 };
