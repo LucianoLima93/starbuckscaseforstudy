@@ -19,7 +19,7 @@ const Header = () => {
             <Wrapper>
               <LeftMenu>
                 <ul>
-                  <li><a>Menu</a></li>
+                  <li><a style={{color: '#767676', cursor: "default"}}>Menu</a></li>
                   <li><Link to="/rewards">Rewards</Link></li>
                   <li><Link to="/gift">Gift Cards</Link></li>
                 </ul>
