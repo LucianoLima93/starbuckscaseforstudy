@@ -18,7 +18,6 @@ const light = {
   },
   font: {
     family: 'SoDo Sans',
-    // family: "'SoDo Sans', Helvetica Neue, Helvetica, Arial, sans-serif",
     weight: {
       light: 300,
       regular: 400,
