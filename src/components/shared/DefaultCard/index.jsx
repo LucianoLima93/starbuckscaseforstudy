@@ -17,7 +17,7 @@ const DefaultCard = ({item}) => {
             src={defaultImages.placeholder} alt="placeholder"/>
           <Image
             showImage={!isLoaded}
-            src={item.assets[0].uri} alt="carousel"
+            src={item.largeImageUrl} alt="carousel"
             onLoad={() => setIsLoaded(false)}/>
         </ImageSpread>
       </ImageContainer>

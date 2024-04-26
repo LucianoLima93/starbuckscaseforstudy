@@ -22,6 +22,7 @@ const Header = () => {
                   <li><a style={{color: '#767676', cursor: "default"}}>Menu</a></li>
                   <li><Link to="/rewards">Rewards</Link></li>
                   <li><Link to="/gift">Gift Cards</Link></li>
+                  <li><Link to="/newgift">New Gift</Link></li>
                 </ul>
               </LeftMenu>
               <RightMenu>
