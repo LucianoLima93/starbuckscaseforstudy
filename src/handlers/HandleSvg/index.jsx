@@ -1,5 +1,5 @@
+import { ThemeContext } from '@emotion/react';
 import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
 
 const Svg = ({
   width = '48px',
@@ -23,7 +23,7 @@ const Svg = ({
           <g fill="#006341">
             <path d="M53.595 57.01h-1.526v4.105h-.547v-4.105h-1.522v-.51h3.595v.51zM54.236 56.5h.811l1.57 3.618h.011l1.574-3.618h.798v4.615h-.551v-3.869h-.012l-1.653 3.869h-.333l-1.659-3.869h-.011v3.869h-.545v-4.615z"></path>
           </g>
-        </svg> 
+        </svg>
       )}
       {name === "ic-find" && (
         <svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" style={{ width: width, height: height, ...style }} viewBox="0 0 24 24">

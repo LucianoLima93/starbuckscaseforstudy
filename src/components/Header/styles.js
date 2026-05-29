@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const Container = styled.header`
   position: relative;
@@ -15,13 +15,8 @@ export const Nav = styled.nav`
     list-style: none;
     margin: 0;
     padding: 0;
-    li {
-      display: inline-block;
-      padding-left: 2.4rem;
-      &:first-child {
-        padding-left: 0;
-      }
-    }
+    display: flex;
+    gap: 2.4rem;
   }
 `;
 
@@ -95,7 +90,7 @@ export const RightMenu = styled.div`
   div {
     a {
       display: inline-block;
-      &:first-child {
+      &:first-of-type {
         font-weight: 600;
         margin-right: 4rem;
       }

@@ -3,7 +3,7 @@ import Carousel from "../../components/shared/NewCarousel";
 import Container, { CarouselTitle } from "./styles";
 import { starbucksCarouselData } from "../../data/carouselNew";
 import Button from "../../components/shared/Button";
-import { ThemeContext } from "styled-components";
+import { ThemeContext } from "@emotion/react";
 import NewCard from "../../components/shared/NewCard";
 
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const ImageContainer = styled.div`
   background-color: ${(props) => props.theme.color.brand.light};
@@ -13,13 +13,13 @@ export const ImageContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  
+
 `;
 export const TextBlock = styled.div`
   h2 {
     font-weight: 600;
     font-size: 3.6rem;
-    line-height: 1.29;  
+    line-height: 1.29;
   }
   span {
     font-size: 1.9rem;

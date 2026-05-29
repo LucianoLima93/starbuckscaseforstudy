@@ -3,8 +3,8 @@ import Carousel from "../../components/shared/Carousel";
 import Container, { CarouselTitle } from "./styles";
 import { starbucksCarouselData } from "../../data/carousel";
 import Button from "../../components/shared/Button";
-import { ThemeContext } from "styled-components";
 import DefaultCard from "../../components/shared/DefaultCard";
+import { ThemeContext } from '@emotion/react';
 
 
 const GiftCard = () => {
