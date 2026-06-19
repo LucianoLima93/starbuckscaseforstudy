@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+interface WithShowImage {
+  showImage?: boolean;
+}
+
 export const CardContainer = styled.div`
   width: 24.16667%;
   padding: 0 1.6rem;
@@ -75,7 +79,7 @@ export const ImageSpread = styled.div`
   height: 100%;
 `;
 
-export const Image = styled.img`
+export const Image = styled.img<WithShowImage>`
   width: 100%;
   height: auto;
   border-radius: 3.3333%/5.298%;

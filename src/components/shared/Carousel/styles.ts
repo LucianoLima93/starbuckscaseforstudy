@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+interface WithDirection {
+  direction: 'left' | 'right';
+}
+
 export const Container = styled.div`
   overflow: hidden;
   z-index: 0;
@@ -25,7 +29,7 @@ export const CarouselContainer = styled.div`
   margin-left: -1.6rem;
 `;
 
-export const ButtonArrowContainer = styled.div`
+export const ButtonArrowContainer = styled.div<WithDirection>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

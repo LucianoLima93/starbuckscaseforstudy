@@ -1,4 +1,9 @@
 import styled from '@emotion/styled';
+import type { ColumnType } from '../../../data/twoColumns';
+
+interface WithColumnType {
+  columnType?: ColumnType;
+}
 
 export const Container = styled.div`
   width: 100%;
@@ -28,7 +33,7 @@ export const ColumnTwo = styled.div`
     width: calc(100% * (6 / 12));
   }
 `;
-export const Title = styled.div`
+export const Title = styled.div<WithColumnType>`
   line-height: 1.2;
   width: 100%;
   font-weight: 600;
@@ -49,7 +54,7 @@ export const Title = styled.div`
     }}
   }
 `;
-export const Description = styled.div`
+export const Description = styled.div<WithColumnType>`
   width: 100%;
   @media screen and (min-width: 992px) {
     max-width: 83%;

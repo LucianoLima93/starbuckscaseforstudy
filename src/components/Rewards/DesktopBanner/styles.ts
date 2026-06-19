@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
-export const ImageContainer = styled.div`
+interface ImageContainerProps {
+  desktopImage: string;
+}
+
+export const ImageContainer = styled.div<ImageContainerProps>`
   background-color: ${(props) => props.theme.color.brand.light};
   background-image: ${(props) => props.desktopImage};
   display: flex;
